@@ -1,4 +1,4 @@
-const base = (import.meta.env.VITE_API_URL || 'http://localhost:4000/api').replace(/\/$/, '');
+const base = (import.meta.env.VITE_API_URL || '/api').replace(/\/$/, '');
 export async function api(path, options = {}) {
   const token = sessionStorage.getItem('clinic_token');
   let response;

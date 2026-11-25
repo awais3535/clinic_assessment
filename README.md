@@ -25,7 +25,7 @@ npm run db:seed --prefix backend
 npm run dev
 ```
 
-Open **http://localhost:5173** and sign in with the `STAFF_EMAIL` and `STAFF_PASSWORD` you configured. API health: **http://localhost:4000/api/health**. Use `localhost` consistently because CORS permits the exact configured frontend origin.
+Open **http://localhost:5173** or **http://127.0.0.1:5173** and sign in with the `STAFF_EMAIL` and `STAFF_PASSWORD` in `backend/.env`. The values in `.env.example` are placeholders, not automatically configured credentials. API health: **http://localhost:4000/api/health**. Local frontend requests use `/api`, which Vite proxies to the backend on port 4000, so either frontend address works. On Render, set `VITE_API_URL` to the deployed API URL including `/api`.
 
 The optional root development command starts both processes. They also work independently:
 
