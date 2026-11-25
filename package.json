@@ -6,7 +6,16 @@
     "build": "npm run build --prefix frontend",
     "lint": "npm run lint --prefix backend && npm run lint --prefix frontend",
     "test": "npm test --prefix backend",
+    "test:e2e": "playwright test",
+    "docs:pdf": "node scripts/export-document.mjs",
+    "format": "prettier --write backend frontend/src frontend/*.js frontend/index.html tests scripts playwright.config.js package.json render.yaml README.md docs/*.md docs/submission.json",
+    "format:check": "prettier --check backend frontend/src frontend/*.js frontend/index.html tests scripts playwright.config.js package.json render.yaml README.md docs/*.md docs/submission.json",
     "install:all": "npm ci && npm ci --prefix backend && npm ci --prefix frontend"
   },
-  "devDependencies": { "concurrently": "^9.2.1" }
+  "devDependencies": {
+    "@playwright/test": "^1.65.1",
+    "concurrently": "^9.2.1",
+    "luxon": "^3.7.2",
+    "prettier": "^3.10.1"
+  }
 }
