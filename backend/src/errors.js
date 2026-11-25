@@ -15,15 +15,13 @@ export function errorHandler(error, _req, res, _next) {
     error = new ApiError(400, 'Request body must be valid JSON.');
   const status = error.status || 500;
   if (status >= 500) console.error(error);
-  res
-    .status(status)
-    .json({
-      success: false,
-      message:
-        status >= 500
-          ? 'The server could not complete your request. Please try again.'
-          : error.message,
-      ...(error.fields && { fields: error.fields }),
-    });
+  res.status(status).json({
+    success: false,
+    message:
+      status >= 500
+        ? 'The server could not complete your request. Please try again.'
+        : error.message,
+    ...(error.fields && { fields: error.fields }),
+  });
 }
 export const ok = (res, data, status = 200) => res.status(status).json({ success: true, data });

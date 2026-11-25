@@ -30,12 +30,10 @@ const loginLimit = rateLimit({
   standardHeaders: 'draft-8',
   legacyHeaders: false,
   handler: (_req, res) =>
-    res
-      .status(429)
-      .json({
-        success: false,
-        message: 'Too many login attempts. Please try again in 15 minutes.',
-      }),
+    res.status(429).json({
+      success: false,
+      message: 'Too many login attempts. Please try again in 15 minutes.',
+    }),
 });
 app.post('/api/auth/login', loginLimit, async (req, res) => {
   const data = validate(loginSchema, req.body);
