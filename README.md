@@ -39,18 +39,29 @@ The seed creates four doctors and nine appointments around the day it first runs
 ## Layout and architecture
 
 ```text
-frontend/     React Router pages, shared components, auth context, API service
-backend/      Express routes, services, validation, authentication, SQL database
-docs/         Screenshots, submission links, project PDF, Loom checklist
-tests/        Browser workflows against the real API and database
-render.yaml   Render static site + Express service + PostgreSQL blueprint
+clinic/
+├── frontend/              # React application
+│   └── src/
+│       ├── pages/         # Login, dashboard, doctors, appointments
+│       ├── components/    # Shared layout, forms, dialogs, table
+│       ├── api.js         # Backend requests
+│       └── auth.jsx       # Staff session
+├── backend/               # The only backend application
+│   ├── src/               # Express routes, services, validation, auth
+│   ├── db/                # PostgreSQL migration and seed
+│   └── test/              # API integration tests
+├── tests/                 # Browser workflow tests
+├── docs/                  # Assessment PDF, screenshots, walkthrough
+├── scripts/               # PDF export utility
+├── package.json           # Commands to run both applications
+└── render.yaml            # Render deployment settings
 ```
 
 Frontend pages call a single fetch-based service. Express validates requests, applies scheduling rules, and runs parameterized SQL through a pooled PostgreSQL connection. SQL migrations are versioned. Doctor-row locks serialize appointment overlap checks so two simultaneous bookings cannot reserve the same doctor/time.
 
 Reusable UI includes layout/navigation, buttons, fields, dialogs, feedback, badges, availability controls, and the appointment table. React escapes rendered values. Native dialogs provide focus containment, keyboard dismissal, and focus restoration. Tables scroll within their container on small screens.
 
-The original MongoDB/payment boilerplate is excluded from this application and ignored by Git; it remains locally for reference. There are no payment, upload, or email-service dependencies in the implemented application.
+`backend/` is the only backend. The original MongoDB/payment boilerplate has been removed. Frontend and backend remain separate applications inside this single repository.
 
 ## Environment variables
 
@@ -149,7 +160,7 @@ Free Render web services sleep after inactivity; the first request can take abou
 
 ## Submission materials and limitations
 
-Run `npm run docs:pdf` to generate `docs/project-document.html` and `docs/project-document.pdf` using Chrome/Playwright. Actual screenshots, architecture, database model, routes, testing notes, limitations, and submission links are included. Missing public URLs are explicitly marked pending rather than invented. Add the real Loom URL to `docs/submission.json` before regenerating the final PDF so it contains a clickable video link.
+The assessment PDF is in `docs/project-document.pdf`. Run `npm run docs:pdf` to regenerate it using Chrome/Playwright; its intermediate HTML is ignored by Git. Screenshots, architecture, database model, routes, testing notes, limitations, and submission links are included. Missing public URLs are explicitly marked pending. Add the real Loom URL to `docs/submission.json` before regenerating the final PDF so it contains a clickable video link.
 
 Follow `docs/WALKTHROUGH.md` for the recording and Google Drive submission checklist. The recording must be made by the candidate, who should be able to explain the implementation. Public deployment, the final Loom link, and publicly shared Drive files require the corresponding accounts and must be verified before submission.
 

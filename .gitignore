@@ -8,4 +8,5 @@ coverage/
 *.log
 test-results/
 playwright-report/
-backend-boiler-plate/
+docs/project-document.html
+docs/supporting-files.zip
