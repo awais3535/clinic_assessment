@@ -1,0 +1,12 @@
+{
+  "name": "dental-clinic",
+  "private": true,
+  "scripts": {
+    "dev": "concurrently -k -n api,web \"npm run dev --prefix backend\" \"npm run dev --prefix frontend\"",
+    "build": "npm run build --prefix frontend",
+    "lint": "npm run lint --prefix backend && npm run lint --prefix frontend",
+    "test": "npm test --prefix backend",
+    "install:all": "npm ci && npm ci --prefix backend && npm ci --prefix frontend"
+  },
+  "devDependencies": { "concurrently": "^9.2.1" }
+}
