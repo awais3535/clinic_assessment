@@ -12,5 +12,7 @@ export async function transaction(work) {
   } catch (error) {
     await client.query('ROLLBACK');
     throw error;
-  } finally { client.release(); }
+  } finally {
+    client.release();
+  }
 }

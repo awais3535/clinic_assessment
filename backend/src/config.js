@@ -7,5 +7,6 @@ export const config = {
 };
 export function validateConfig() {
   if (!config.databaseUrl) throw new Error('DATABASE_URL is required. Copy .env.example to .env.');
-  if (!config.jwtSecret || config.jwtSecret.length < 32) throw new Error('JWT_SECRET must contain at least 32 characters.');
+  if (!config.jwtSecret || config.jwtSecret.length < 32)
+    throw new Error('JWT_SECRET must contain at least 32 characters.');
 }
